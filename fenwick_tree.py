@@ -1,31 +1,50 @@
 #!/usr/bin/env python3
-"""fenwick_tree - Binary indexed tree (Fenwick tree)."""
-import sys
-class Fenwick:
-    def __init__(s,n):s.n=n;s.tree=[0]*(n+1)
+"""Fenwick Tree (Binary Indexed Tree) — zero-dep."""
+
+class FenwickTree:
+    def __init__(self, n):
+        self.n=n; self.tree=[0]*(n+1)
+    def update(self, i, delta):
+        while i<=self.n: self.tree[i]+=delta; i+=i&(-i)
+    def query(self, i):
+        s=0
+        while i>0: s+=self.tree[i]; i-=i&(-i)
+        return s
+    def range_query(self, l, r):
+        return self.query(r)-(self.query(l-1) if l>1 else 0)
     @classmethod
-    def from_array(cls,arr):
-        f=cls(len(arr))
-        for i,v in enumerate(arr):f.update(i,v)
-        return f
-    def update(s,i,delta):
-        i+=1
-        while i<=s.n:s.tree[i]+=delta;i+=i&(-i)
-    def prefix_sum(s,i):
-        i+=1;total=0
-        while i>0:total+=s.tree[i];i-=i&(-i)
-        return total
-    def range_sum(s,l,r):return s.prefix_sum(r)-(s.prefix_sum(l-1) if l>0 else 0)
-    def find_kth(s,k):
-        pos=0;bitmask=1
-        while bitmask<=s.n:bitmask<<=1
-        bitmask>>=1
-        while bitmask:
-            nxt=pos+bitmask
-            if nxt<=s.n and s.tree[nxt]<k:k-=s.tree[nxt];pos=nxt
-            bitmask>>=1
-        return pos
+    def from_array(cls, arr):
+        ft=cls(len(arr))
+        for i,v in enumerate(arr): ft.update(i+1,v)
+        return ft
+
+class FenwickTree2D:
+    def __init__(self, rows, cols):
+        self.rows=rows; self.cols=cols
+        self.tree=[[0]*(cols+1) for _ in range(rows+1)]
+    def update(self, r, c, delta):
+        i=r
+        while i<=self.rows:
+            j=c
+            while j<=self.cols: self.tree[i][j]+=delta; j+=j&(-j)
+            i+=i&(-i)
+    def query(self, r, c):
+        s=0; i=r
+        while i>0:
+            j=c
+            while j>0: s+=self.tree[i][j]; j-=j&(-j)
+            i-=i&(-i)
+        return s
+
 if __name__=="__main__":
-    data=[3,2,4,5,1,1,5,3];f=Fenwick.from_array(data);print(f"Data: {data}")
-    print(f"Prefix sum [0..4]: {f.prefix_sum(4)}");print(f"Range sum [2..5]: {f.range_sum(2,5)}")
-    f.update(3,6);print(f"After +6 at index 3:");print(f"Prefix sum [0..4]: {f.prefix_sum(4)}")
+    arr=[3,2,5,1,4,6,2,8]
+    ft=FenwickTree.from_array(arr)
+    print(f"Array: {arr}")
+    print(f"Prefix sum [1..5]: {ft.query(5)}")
+    print(f"Range sum [2..6]: {ft.range_query(2,6)}")
+    ft.update(3,10)  # arr[2] += 10
+    print(f"After arr[2]+=10, prefix [1..5]: {ft.query(5)}")
+    # 2D
+    ft2=FenwickTree2D(3,3)
+    ft2.update(1,1,5); ft2.update(2,2,3); ft2.update(1,2,1)
+    print(f"\n2D query (1,1)-(2,2): {ft2.query(2,2)}")
