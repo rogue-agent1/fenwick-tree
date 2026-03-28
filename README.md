@@ -1,5 +1,11 @@
 # fenwick-tree
-Fenwick tree (BIT) for prefix sums. Zero dependencies.
+
+Binary indexed tree (Fenwick tree).""".
+
+Zero dependencies. Python 3.8+.
+
+## Usage
+
 ```bash
-python3 fenwick_tree.py
+python3 fenwick_tree.py --help
 ```
