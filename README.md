@@ -1,11 +1,10 @@
 # fenwick-tree
 
-Binary Indexed Tree (Fenwick tree) for prefix sums.
+Single-file Python CLI. Zero dependencies.
 
 ## Usage
 
 ```bash
+python3 fenwick_tree.py
 python3 fenwick_tree.py test
 ```
-
-Zero dependencies. Python 3.8+.
