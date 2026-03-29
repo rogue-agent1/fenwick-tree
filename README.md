@@ -1,10 +1,3 @@
-# fenwick-tree
-
-Single-file Python CLI. Zero dependencies.
-
-## Usage
-
-```bash
-python3 fenwick_tree.py
-python3 fenwick_tree.py test
-```
+# fenwick_tree
+Fenwick tree (BIT) — prefix sums, range queries, kth element.
+Single-file Python, zero dependencies.
