@@ -1,6 +1,6 @@
 # fenwick-tree
 
-Fenwick tree (Binary Indexed Tree) for prefix sums, range updates, and order statistics
+Binary indexed tree (Fenwick tree)
 
 ## Usage
 
@@ -10,5 +10,5 @@ python3 fenwick_tree.py --help
 
 ## Features
 
-- Zero dependencies (Python 3.8+ stdlib only)
+- Zero dependencies (Python 3.8+)
 - Single file implementation
