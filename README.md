@@ -1,9 +1,11 @@
-# fenwick_tree
+# fenwick-tree
 
-Fenwick tree (BIT) with prefix sums, range queries, kth element, 2D variant
+Binary Indexed Tree (Fenwick tree) for prefix sums.
+
+## Usage
 
 ```bash
 python3 fenwick_tree.py test
 ```
 
-Zero deps. Python 3.8+.
+Zero dependencies. Python 3.8+.
